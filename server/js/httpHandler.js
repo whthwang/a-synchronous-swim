@@ -10,5 +10,11 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   res.writeHead(200, headers);
-  res.end();
+
+  var possibleMoves = ['left','right','up','down'];
+  // possibleMoves[Math.floor(Math.random() * Math.floor(4))]
+
+  res.end(possibleMoves[Math.floor(Math.random() * 4)]);
 };
+
+
