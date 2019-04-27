@@ -1,5 +1,5 @@
 (function() {
-
+  
   const serverUrl = 'http://127.0.0.1:3000';
 
   //
@@ -9,9 +9,19 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      success: (data) => (SwimTeam.move(data)),
+      success: (data) => (cb(JSON.parse(data))),
       error: () => (console.log('GET failed'))
     })
+  }
+  
+  const cb = (data) => {
+    const recurse = (data) => {
+      if (data.length) {
+        SwimTeam.move(data.shift())
+        setTimeout(() => recurse(data), 1500); 
+      }
+    }
+    recurse(data);
   }
 
   ajaxGet();
